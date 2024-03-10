@@ -1,0 +1,3 @@
+docker build . -t yeongtongcitizen/ytc:16
+docker tag yeongtongcitizen/ytc:16 gcr.io/yt-people-409508/ytc:16
+docker push gcr.io/yt-people-409508/ytc:16
