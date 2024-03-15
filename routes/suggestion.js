@@ -15,7 +15,7 @@ router.delete("/:id", verifyTokenAndAuthorization, suggestionController.deleteSu
 router.get("/:id", verifyTokenAndAuthorization, suggestionController.getSuggestionById);
 
 // GET USER List
-router.get("/list", verifyTokenAndAuthorization, suggestionController.getSuggestionList);
+router.get("/", verifyTokenAndAuthorization, suggestionController.getSuggestionList);
 router.get("/type/:type", verifyTokenAndAuthorization, suggestionController.getSuggestionList);
 
 module.exports = router

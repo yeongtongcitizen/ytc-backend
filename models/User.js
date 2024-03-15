@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema(
         phone: { type: String, required: true },
         coords: {
             latitude: {type: Number , required: false},
-            longitude: {type: Number , required: true},
+            longitude: {type: Number , required: false},
             latitudeDelta:{type: Number , default: 0.0122},
             longitudeDelta: {type: Number , default: 0.0221},
             address: {type: String , required: false},

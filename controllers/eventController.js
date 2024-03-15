@@ -8,6 +8,11 @@ module.exports = {
         newEvent.updateBy = req.user.id;
 
         try {
+
+            if( !newEvent.type){
+                newEvent.type = 'Featured';
+            }
+
             await newEvent.save();
             res.status(201).json({ status: true, message: 'Event successfully created' });
         } catch (error) {
@@ -81,28 +86,56 @@ module.exports = {
     },
 
     getEventList: async (req, res) => {
-      const flag = req.params.id
+        
+        const type = req.params.type
 
         try {
-            const events = await Event.find()
-            .populate("joinUser").lean()
-            .populate({
-                path: "joinUser", 
-                populate: {
-                    path: 'createBy',
-                    select: "username profileImage"
-                }
-             })
-             .populate({
-                path: "attendUser", 
-                populate: {
-                    path: 'createBy',
-                    select: "username profileImage"
-                }
-             })
-             .sort({startAt: -1})
 
-            res.status(200).json({ status: true, data: events}); 
+            console.log( " event type : " + type);
+
+            if( !type){
+                console.log(" all ")
+                const events = await Event.find({type: 'Featured'})
+                .populate("joinUser").lean()
+                .populate({
+                    path: "joinUser", 
+                    populate: {
+                        path: 'createBy',
+                        select: "username profileImage"
+                    }
+                 })
+                 .populate({
+                    path: "attendUser", 
+                    populate: {
+                        path: 'createBy',
+                        select: "username profileImage"
+                    }
+                 })
+                 .sort({startAt: -1})
+                 res.status(200).json({ status: true, data: events}); 
+            }else{
+                const events = await Event.find({type: type})
+                .populate("joinUser").lean()
+                .populate({
+                    path: "joinUser", 
+                    populate: {
+                        path: 'createBy',
+                        select: "username profileImage"
+                    }
+                 })
+                 .populate({
+                    path: "attendUser", 
+                    populate: {
+                        path: 'createBy',
+                        select: "username profileImage"
+                    }
+                 })
+                 .sort({startAt: -1})
+                 res.status(200).json({ status: true, data: events}); 
+            }
+            
+
+            
         } catch (error) {
             res.status(500).json({ status: false, message: error.message });  
         }

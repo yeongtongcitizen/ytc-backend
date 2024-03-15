@@ -7,7 +7,7 @@ const dayjs = require('dayjs');
 const { v4: uuidv4 } = require("uuid");
 const uploadMiddleware = multer({
   limits: {
-    fileSize: 1024 * 1024 * 1000000,
+    fileSize: 1048576 * 100, //1*100M
   },
   fileFilter: (req, file, done) => {
     console.log(" test fileFilter ");

@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const eventSchema = new mongoose.Schema({
     title: { type: String, required: false },
     description: { type: String, required: false },
+    group: { type: String, default: "영통시민연대 일반활동", enum: ["영통시민연대 일반활동", "영통시민연대 임원회의",  "영통시민연대 정기모임",] },
+    type: { type: String, default: "Upcomming", enum: ["Upcomming", "Meeting", "Featured"] },
     startAt: { type: Date, required: false },
     endAt: { type: Date, required: false },
     coords: {

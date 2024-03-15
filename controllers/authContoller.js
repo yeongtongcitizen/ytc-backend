@@ -8,8 +8,10 @@ module.exports = {
     createUser: async (req, res) => {
         const user = req.body;
         try {
-          
+
+            console.log( " new user : " + JSON.stringify(user));
             const newUser = new User(req.body);
+
             await newUser.save();
             res.status(201).json({ status: true })
         } catch (createUserError) {

@@ -38,18 +38,21 @@ module.exports = {
     },
 
     getSuggestionList: async (req, res) => {
+        
         let type = req.params.type
+        console.log("suggestion type :  " + type);
         try {
             let suggestions;
             if( !type ){
+                console.log("suggestion all ");
                 suggestions = await Suggestion.find()
                 .populate({
                     path: 'createBy',
                     select: "username profileImage"
                 })
-                .populate("greatUser").lean()
+                .populate("great").lean()
                 .populate({
-                    path: "greatUser", 
+                    path: "great", 
                     populate: {
                         path: 'createBy',
                         select: "username profileImage"
